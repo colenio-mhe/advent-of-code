@@ -1,6 +1,9 @@
-data class Cubes(
-    val red: Int, val green: Int, val blue: Int
-)
+data class Cubes(val red: Int, val green: Int, val blue: Int) {
+    fun checkRule(givenRule: Cubes): Boolean =
+        this.let {
+            it.red <= givenRule.red && it.green <= givenRule.green &&  it.blue <= givenRule.blue
+        }
+}
 
 fun main() {
     fun listOfGames(input: String): List<Cubes>  =
@@ -18,17 +21,12 @@ fun main() {
         it.replace("Game", "").substringBefore(":").trim().toInt() to listOfGames(it.replace(Regex("Game \\d+:"), "").trim())
     }
 
-    fun checkRule(game: Cubes, givenRule: Cubes): Boolean =
-        game.let {
-            it.red <= givenRule.red && it.green <= givenRule.green &&  it.blue <= givenRule.blue
-        }
-
     fun part1(input: List<String>): Int {
         val givenGame = Cubes(12,13,14)
         val games = mapOfGames(input)
 
         return games.map {
-            when(it.value.all {cubes -> checkRule(cubes, givenGame) }) {
+            when(it.value.all {cubes -> cubes.checkRule(givenGame) }) {
                 true -> it.key
                 false -> 0
             }
