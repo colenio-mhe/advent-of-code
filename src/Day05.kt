@@ -18,6 +18,10 @@ fun main() {
         }
     }
 
+    /**
+     * After talking to a friend it seems like this solution is fuzzy and doesn't work for every input :D
+     * It fails for unmapped areas
+     */
     fun part2(input: List<String>): Long {
         val seeds = input.first().substringAfter(" ").split(" ").map { it.toLong() }.chunked(2).map { it.first()..<it.first() + it.last() }
         val maps = parseMaps(input)
