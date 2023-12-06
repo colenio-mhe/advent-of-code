@@ -12,8 +12,8 @@ fun main() {
         val seeds = input.first().substringAfter(" ").split(" ").map { it.toLong() }
         val maps = parseMaps(input)
         return seeds.minOf { seed ->
-            maps.fold(seed) { loc, map ->
-                map.entries.firstOrNull { loc in it.key }?.let { (source, dest) -> loc + (dest.first - source.first) } ?: loc
+            maps.fold(seed) { acc, map ->
+                map.entries.firstOrNull { acc in it.key }?.let { (source, dest) -> acc + (dest.first - source.first) } ?: acc
             }
         }
     }
@@ -28,9 +28,9 @@ fun main() {
 
         return seeds.flatMap { seedsRange ->
             maps.fold(listOf(seedsRange)) { locRange, map ->
-                locRange.flatMap {loc ->
+                locRange.flatMap {acc ->
                     map.entries.mapNotNull { (source, dest) ->
-                        (maxOf(source.first, loc.first) to minOf(source.last, loc.last)).let { (start, end) ->
+                        (maxOf(source.first, acc.first) to minOf(source.last, acc.last)).let { (start, end) ->
                             if (start <= end) (dest.first - source.first).let { (start + it)..(end + it) } else null
                         }
                     }
