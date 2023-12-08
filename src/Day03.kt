@@ -1,31 +1,30 @@
-data class Point(val x: Int, val y: Int) {
-    fun neighbors(): Set<Point> = setOf(
-        Point(x - 1, y - 1),
-        Point(x, y - 1),
-        Point(x + 1, y - 1),
-        Point(x - 1, y),
-        Point(x + 1, y),
-        Point(x - 1, y + 1),
-        Point(x, y + 1),
-        Point(x + 1, y + 1)
-    )
-}
-
-class Number {
-    private val number = mutableListOf<Char>()
-    private val locations = mutableSetOf<Point>()
-    fun add(c: Char, location: Point) {
-        number.add(c)
-        locations.addAll(location.neighbors())
+fun main() {
+    data class Point(val x: Int, val y: Int) {
+        fun neighbors(): Set<Point> = setOf(
+            Point(x - 1, y - 1),
+            Point(x, y - 1),
+            Point(x + 1, y - 1),
+            Point(x - 1, y),
+            Point(x + 1, y),
+            Point(x - 1, y + 1),
+            Point(x, y + 1),
+            Point(x + 1, y + 1)
+        )
     }
 
-    fun isNotEmpty() = number.isNotEmpty()
-    fun isAdjacentToAny(points: Set<Point>): Boolean = locations.intersect(points).isNotEmpty()
-    fun isAdjacentTo(point: Point): Boolean = point in locations
-    fun toInt(): Int = number.joinToString("").toInt()
-}
+    class Number {
+        private val number = mutableListOf<Char>()
+        private val locations = mutableSetOf<Point>()
+        fun add(c: Char, location: Point) {
+            number.add(c)
+            locations.addAll(location.neighbors())
+        }
 
-fun main() {
+        fun isNotEmpty() = number.isNotEmpty()
+        fun isAdjacentToAny(points: Set<Point>): Boolean = locations.intersect(points).isNotEmpty()
+        fun isAdjacentTo(point: Point): Boolean = point in locations
+        fun toInt(): Int = number.joinToString("").toInt()
+    }
 
     fun parse(
         input: List<String>, takeSymbol: (Char) -> Boolean = { it != '.' }

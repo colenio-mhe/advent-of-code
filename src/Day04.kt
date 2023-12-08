@@ -1,17 +1,16 @@
 import kotlin.math.pow
-
-data class Card(val id: Int, private val winningNumbers: Set<Int>, private val numbers: Set<Int>) {
-    val score: Int
-        get() {
-            return 2.0.pow(winningNumbers.intersect(numbers).count().toDouble() - 1).toInt()
-        }
-    val numberOfWinningMatches: Int
-        get() {
-            return winningNumbers.intersect(numbers).count()
-        }
-}
-
 fun main() {
+    data class Card(val id: Int, private val winningNumbers: Set<Int>, private val numbers: Set<Int>) {
+        val score: Int
+            get() {
+                return 2.0.pow(winningNumbers.intersect(numbers).count().toDouble() - 1).toInt()
+            }
+        val numberOfWinningMatches: Int
+            get() {
+                return winningNumbers.intersect(numbers).count()
+            }
+    }
+
     fun parse(input: List<String>): List<Card> {
         return buildList {
             input.forEach {card ->

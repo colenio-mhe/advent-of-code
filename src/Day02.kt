@@ -1,11 +1,11 @@
-data class Cubes(val red: Int, val green: Int, val blue: Int) {
-    fun checkRule(givenRule: Cubes): Boolean =
-        this.let {
-            it.red <= givenRule.red && it.green <= givenRule.green &&  it.blue <= givenRule.blue
-        }
-}
-
 fun main() {
+    data class Cubes(val red: Int, val green: Int, val blue: Int) {
+        fun checkRule(givenRule: Cubes): Boolean =
+            this.let {
+                it.red <= givenRule.red && it.green <= givenRule.green &&  it.blue <= givenRule.blue
+            }
+    }
+
     fun listOfGames(input: String): List<Cubes>  =
         input.split(";").map { gameString ->
             val components = gameString.trim().split(", ")
